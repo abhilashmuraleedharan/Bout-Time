@@ -1,14 +1,136 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<!--
-   WorldEvents.plist
-   'Bout Time
-
-   Created by Abhilash Muraleedharan on 13/08/18.
-   Copyright (c) 2018 AbhilashApps. All rights reserved.
--->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-    <dict>
-    
-    </dict>
+<dict>
+	<key>Wright Brother&apos;s First Flight</key>
+	<array>
+		<string>1903</string>
+		<string>https://airandspace.si.edu/exhibitions/wright-brothers/online/fly/1903/</string>
+	</array>
+	<key>RMS Titanic sank in the North Atlantic Ocean</key>
+	<array>
+		<string>1912</string>
+		<string>https://en.wikipedia.org/wiki/RMS_Titanic</string>
+	</array>
+	<key>Hitler Becomes German Chancellor</key>
+	<array>
+		<string>1933</string>
+		<string>https://www.history.com/this-day-in-history/adolf-hitler-is-named-chancellor-of-germany</string>
+	</array>
+	<key>Hindenburg Airship Crash</key>
+	<array>
+		<string>1937</string>
+		<string>https://en.wikipedia.org/wiki/Hindenburg_disaster</string>
+	</array>
+	<key>Evacuation of Dunkirk</key>
+	<array>
+		<string>1940</string>
+		<string>https://en.wikipedia.org/wiki/Dunkirk_evacuation</string>
+	</array>
+	<key>Pearl Harbour Attacked</key>
+	<array>
+		<string>1941</string>
+		<string>https://en.wikipedia.org/wiki/Attack_on_Pearl_Harbor</string>
+	</array>
+	<key>Liberation of Paris</key>
+	<array>
+		<string>1944</string>
+		<string>https://en.wikipedia.org/wiki/Liberation_of_Paris</string>
+	</array>
+	<key>Hiroshima Atomic Bomb</key>
+	<array>
+		<string>1945</string>
+		<string>https://en.wikipedia.org/wiki/Atomic_bombings_of_Hiroshima_and_Nagasaki</string>
+	</array>
+	<key>India and Pakistan Gain Independence</key>
+	<array>
+		<string>1947</string>
+		<string>https://www.history.com/this-day-in-history/india-and-pakistan-win-independence</string>
+	</array>
+	<key>Korean War Starts</key>
+	<array>
+		<string>1950</string>
+		<string>https://en.wikipedia.org/wiki/Korean_War</string>
+	</array>
+	<key>Launch of First Nuclear Submarine - USS Nautilus</key>
+	<array>
+		<string>1954</string>
+		<string>https://en.wikipedia.org/wiki/USS_Nautilus_(SSN-571)</string>
+	</array>
+	<key>Manchester United Players Die in Munich Air Crash</key>
+	<array>
+		<string>1958</string>
+		<string>https://en.wikipedia.org/wiki/Munich_air_disaster</string>
+	</array>
+	<key>Yuri gagarin became the first man in space</key>
+	<array>
+		<string>1961</string>
+		<string>https://en.wikipedia.org/wiki/Yuri_Gagarin</string>
+	</array>
+	<key>Martin Luther King Delivers His &quot;I have a dream&quot; speech</key>
+	<array>
+		<string>1963</string>
+		<string>https://www.archives.gov/nyc/exhibit/mlk</string>
+	</array>
+	<key>Armstrong Sets Foot on the Moon</key>
+	<array>
+		<string>1969</string>
+		<string>https://www.nasa.gov/audience/forstudents/k-4/stories/first-person-on-moon.html</string>
+	</array>
+	<key>Bill Gates and Paul Allen found Microsoft</key>
+	<array>
+		<string>1975</string>
+		<string>https://en.wikipedia.org/wiki/Microsoft</string>
+	</array>
+	<key>Steve Jobs and Steve Wozniak form Apple</key>
+	<array>
+		<string>1976</string>
+		<string>https://www.macworld.co.uk/feature/apple/history-of-apple-steve-jobs-mac-3606104/</string>
+	</array>
+	<key>Chernoybl Nuclear Disaster</key>
+	<array>
+		<string>1986</string>
+		<string>https://en.wikipedia.org/wiki/Chernobyl_disaster</string>
+	</array>
+	<key>Sergey Brin and Larry Page develop the Google search engine</key>
+	<array>
+		<string>1996</string>
+		<string>https://en.wikipedia.org/wiki/History_of_Google#Beginning</string>
+	</array>
+	<key>Princess Diana Dies in Paris Car Crash</key>
+	<array>
+		<string>1997</string>
+		<string>https://en.wikipedia.org/wiki/Death_of_Diana,_Princess_of_Wales</string>
+	</array>
+	<key>9/11 Attack</key>
+	<array>
+		<string>2001</string>
+		<string>https://en.wikipedia.org/wiki/September_11_attacks</string>
+	</array>
+	<key>Facebook Founded</key>
+	<array>
+		<string>2004</string>
+		<string>https://en.wikipedia.org/wiki/Facebook</string>
+	</array>
+	<key>YouTube Founded</key>
+	<array>
+		<string>2005</string>
+		<string>https://en.wikipedia.org/wiki/YouTube</string>
+	</array>
+	<key>Apple unveils iPhone</key>
+	<array>
+		<string>2007</string>
+		<string>https://www.macworld.com/article/1054769/smartphones/iphone.html</string>
+	</array>
+	<key>Barack Obama Elected as The First Black President of America</key>
+	<array>
+		<string>2008</string>
+		<string>https://en.wikipedia.org/wiki/Barack_Obama</string>
+	</array>
+	<key>Swift programming lanuage was announced by Apple</key>
+	<array>
+		<string>2014</string>
+		<string>https://en.wikipedia.org/wiki/Swift_(programming_language)</string>
+	</array>
+</dict>
 </plist>
