@@ -12,6 +12,9 @@
 		CCF871EA2121A37A00FD9450 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCF871E82121A37A00FD9450 /* Main.storyboard */; };
 		CCF871EC2121A37D00FD9450 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCF871EB2121A37D00FD9450 /* Assets.xcassets */; };
 		CCF871EF2121A37D00FD9450 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCF871ED2121A37D00FD9450 /* LaunchScreen.storyboard */; };
+		CCF871F82121A3F100FD9450 /* CorrectDing.wav in Resources */ = {isa = PBXBuildFile; fileRef = CCF871F62121A3F100FD9450 /* CorrectDing.wav */; };
+		CCF871F92121A3F100FD9450 /* IncorrectBuzz.wav in Resources */ = {isa = PBXBuildFile; fileRef = CCF871F72121A3F100FD9450 /* IncorrectBuzz.wav */; };
+		CCF871FB2121A6F200FD9450 /* WorldEvents.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCF871FA2121A6F200FD9450 /* WorldEvents.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,9 @@
 		CCF871EB2121A37D00FD9450 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CCF871EE2121A37D00FD9450 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CCF871F02121A37D00FD9450 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CCF871F62121A3F100FD9450 /* CorrectDing.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = CorrectDing.wav; sourceTree = "<group>"; };
+		CCF871F72121A3F100FD9450 /* IncorrectBuzz.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = IncorrectBuzz.wav; sourceTree = "<group>"; };
+		CCF871FA2121A6F200FD9450 /* WorldEvents.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = WorldEvents.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,12 +60,15 @@
 		CCF871E32121A37A00FD9450 /* 'Bout Time */ = {
 			isa = PBXGroup;
 			children = (
+				CCF871F62121A3F100FD9450 /* CorrectDing.wav */,
+				CCF871F72121A3F100FD9450 /* IncorrectBuzz.wav */,
 				CCF871E42121A37A00FD9450 /* AppDelegate.swift */,
 				CCF871E62121A37A00FD9450 /* ViewController.swift */,
 				CCF871E82121A37A00FD9450 /* Main.storyboard */,
 				CCF871EB2121A37D00FD9450 /* Assets.xcassets */,
 				CCF871ED2121A37D00FD9450 /* LaunchScreen.storyboard */,
 				CCF871F02121A37D00FD9450 /* Info.plist */,
+				CCF871FA2121A6F200FD9450 /* WorldEvents.plist */,
 			);
 			path = "'Bout Time";
 			sourceTree = "<group>";
@@ -123,8 +132,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCF871EF2121A37D00FD9450 /* LaunchScreen.storyboard in Resources */,
+				CCF871F92121A3F100FD9450 /* IncorrectBuzz.wav in Resources */,
+				CCF871FB2121A6F200FD9450 /* WorldEvents.plist in Resources */,
 				CCF871EC2121A37D00FD9450 /* Assets.xcassets in Resources */,
 				CCF871EA2121A37A00FD9450 /* Main.storyboard in Resources */,
+				CCF871F82121A3F100FD9450 /* CorrectDing.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
