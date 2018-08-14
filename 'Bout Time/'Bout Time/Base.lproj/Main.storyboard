@@ -51,7 +51,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ixV-Gq-LPS">
                                                 <rect key="frame" x="0.0" y="124" width="349" height="110"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event 2" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HzH-li-4uw">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event 2" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HzH-li-4uw">
                                                         <rect key="frame" x="0.0" y="0.0" width="299" height="110"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
@@ -83,7 +83,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kde-bN-fTT">
                                                 <rect key="frame" x="0.0" y="248" width="349" height="110"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event 3" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfp-hh-JJj">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event 3" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfp-hh-JJj">
                                                         <rect key="frame" x="0.0" y="0.0" width="299" height="110"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
@@ -137,13 +137,34 @@
                                             </stackView>
                                         </subviews>
                                     </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dTj-Ab-z9b">
+                                        <rect key="frame" x="139" y="540" width="97.5" height="55"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="55" id="lTq-Zg-lT9"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="50"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.14509803921568626" blue="0.25882352941176467" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="dTj-Ab-z9b" firstAttribute="centerX" secondItem="VBP-Ny-iOw" secondAttribute="centerX" id="Ak7-Jg-NdM"/>
+                                    <constraint firstAttribute="bottom" secondItem="vwL-cK-od9" secondAttribute="bottom" constant="147" id="BDB-Tf-xMc"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="vwL-cK-od9" secondAttribute="bottom" constant="139" id="EGC-yd-Msp"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="vwL-cK-od9" secondAttribute="trailing" constant="5" id="OVe-6y-zOb"/>
+                                    <constraint firstItem="dTj-Ab-z9b" firstAttribute="top" secondItem="vwL-cK-od9" secondAttribute="bottom" constant="200" id="PCN-ZG-Tb3"/>
+                                    <constraint firstItem="dTj-Ab-z9b" firstAttribute="top" secondItem="xya-x0-eqq" secondAttribute="bottom" constant="20" id="UL5-Vq-CnF"/>
                                     <constraint firstItem="vwL-cK-od9" firstAttribute="top" secondItem="VBP-Ny-iOw" secondAttribute="topMargin" constant="10" id="gd4-t1-oh6"/>
                                     <constraint firstItem="vwL-cK-od9" firstAttribute="leading" secondItem="VBP-Ny-iOw" secondAttribute="leadingMargin" constant="5" id="spH-oQ-XMC"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="BDB-Tf-xMc"/>
+                                        <exclude reference="EGC-yd-Msp"/>
+                                        <exclude reference="PCN-ZG-Tb3"/>
+                                    </mask>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
