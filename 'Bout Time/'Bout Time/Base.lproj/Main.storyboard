@@ -42,6 +42,9 @@
                                                             <constraint firstAttribute="height" constant="110" id="fyx-m5-uKK"/>
                                                         </constraints>
                                                         <state key="normal" image="down_full"/>
+                                                        <connections>
+                                                            <action selector="fullDownButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4W4-Ku-JkZ"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <constraints>
@@ -64,6 +67,9 @@
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nzR-Pq-aU2">
                                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="55"/>
                                                                 <state key="normal" image="up_half"/>
+                                                                <connections>
+                                                                    <action selector="halfUpButton1Tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qjf-aM-10m"/>
+                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OIk-GO-3rZ">
                                                                 <rect key="frame" x="0.0" y="55" width="50" height="55"/>
@@ -72,6 +78,9 @@
                                                                     <constraint firstAttribute="height" constant="55" id="wPN-ni-cIh"/>
                                                                 </constraints>
                                                                 <state key="normal" image="down_half"/>
+                                                                <connections>
+                                                                    <action selector="halfDownButton1Tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Tq1-V0-i4o"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
@@ -96,6 +105,9 @@
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="flB-cD-5bj">
                                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="55"/>
                                                                 <state key="normal" image="up_half"/>
+                                                                <connections>
+                                                                    <action selector="halfUpButton2Tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AmF-af-6E0"/>
+                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Aq-4a-Yck">
                                                                 <rect key="frame" x="0.0" y="55" width="50" height="55"/>
@@ -104,6 +116,9 @@
                                                                     <constraint firstAttribute="height" constant="55" id="Y0V-hn-HPI"/>
                                                                 </constraints>
                                                                 <state key="normal" image="down_half"/>
+                                                                <connections>
+                                                                    <action selector="halfDownButton2Tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aXI-W9-GpT"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
@@ -129,6 +144,9 @@
                                                             <constraint firstAttribute="height" constant="110" id="V8E-0O-LP8"/>
                                                         </constraints>
                                                         <state key="normal" image="up_full"/>
+                                                        <connections>
+                                                            <action selector="fullUpButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HlP-eI-nX0"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <constraints>
@@ -212,8 +230,18 @@
                         <outlet property="event2Label" destination="HzH-li-4uw" id="l6L-hU-mds"/>
                         <outlet property="event3Label" destination="hfp-hh-JJj" id="Uob-03-Fgm"/>
                         <outlet property="event4Label" destination="xya-x0-eqq" id="veC-se-FZ0"/>
+                        <outlet property="failImage" destination="EwN-QI-owd" id="nBA-Tk-22W"/>
                         <outlet property="fullDownButton" destination="E2W-EM-oMG" id="n9h-Rl-Zx8"/>
                         <outlet property="fullUpButton" destination="jDi-ae-iE4" id="4VD-i4-L0B"/>
+                        <outlet property="halfDownButton1" destination="OIk-GO-3rZ" id="9Pb-X9-tja"/>
+                        <outlet property="halfDownButton2" destination="8Aq-4a-Yck" id="KUX-OJ-wsu"/>
+                        <outlet property="halfUpButton1" destination="nzR-Pq-aU2" id="tOp-ZE-s1S"/>
+                        <outlet property="halfUpButton2" destination="flB-cD-5bj" id="dos-Vz-uUO"/>
+                        <outlet property="promptLabel" destination="Ujb-F2-6z0" id="tkK-JH-w9F"/>
+                        <outlet property="successImage" destination="C4G-aN-SXE" id="lDs-De-idT"/>
+                        <outlet property="timerLabel" destination="dTj-Ab-z9b" id="DS1-BU-fjA"/>
+                        <segue destination="Lxo-qD-QDI" kind="show" identifier="gameScoresVCSegue" id="1nw-zR-UWv"/>
+                        <segue destination="395-67-GvL" kind="presentation" identifier="EventOnlineInfoVCModelSegue" id="lde-zS-K39"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -256,7 +284,7 @@
                                         </constraints>
                                         <state key="normal" image="play_again"/>
                                         <connections>
-                                            <segue destination="NA1-cX-20Z" kind="unwind" unwindAction="unwindFromGameScoresVCWithSegue:" id="jA4-nR-YX3"/>
+                                            <action selector="playAgainButtonTapped:" destination="Lxo-qD-QDI" eventType="touchUpInside" id="qSk-nM-wno"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -283,9 +311,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="S6M-I1-UDe"/>
                     </view>
+                    <connections>
+                        <outlet property="scoresLabel" destination="G40-0a-TG5" id="ocN-M1-FDZ"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="gamePlayVCSegue" id="eF0-s4-SfR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M57-bQ-CdD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="NA1-cX-20Z" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="828" y="117.39130434782609"/>
         </scene>
@@ -306,6 +337,9 @@
                                             <constraint firstAttribute="height" constant="50" id="4ti-Hd-vRf"/>
                                         </constraints>
                                         <state key="normal" image="webview_bar"/>
+                                        <connections>
+                                            <action selector="closeButtonTapped:" destination="395-67-GvL" eventType="touchUpInside" id="3Ct-va-8xl"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

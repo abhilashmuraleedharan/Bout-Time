@@ -10,18 +10,23 @@ import UIKit
 
 class GameScoresVC: UIViewController {
 
+    //MARK: - IB Outlets
+    @IBOutlet weak var scoresLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
-
+    // To achieve a status bar with white content
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
+    //MARK: - IB Functions
+    @IBAction func playAgainButtonTapped(_ sender: Any) {
+        performSegue(withIdentifier: "gamePlayVCSegue", sender: self)
+    }
+    
     /*
     // MARK: - Navigation
 

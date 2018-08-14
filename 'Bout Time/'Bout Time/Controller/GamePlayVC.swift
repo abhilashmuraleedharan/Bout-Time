@@ -10,6 +10,7 @@ import UIKit
 
 class GamePlayVC: UIViewController {
 
+    //MARK: - IB Outlets
     @IBOutlet weak var event1Label: UILabel!
     @IBOutlet weak var event2Label: UILabel!
     @IBOutlet weak var event3Label: UILabel!
@@ -17,13 +18,46 @@ class GamePlayVC: UIViewController {
     
     @IBOutlet weak var fullDownButton: UIButton!
     @IBOutlet weak var fullUpButton: UIButton!
+    @IBOutlet weak var halfUpButton1: UIButton!
+    @IBOutlet weak var halfDownButton1: UIButton!
+    @IBOutlet weak var halfUpButton2: UIButton!
+    @IBOutlet weak var halfDownButton2: UIButton!
     
-    
+    @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var promptLabel: UILabel!
+    @IBOutlet weak var successImage: UIImageView!
+    @IBOutlet weak var failImage: UIImageView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        let event1LabelTap = UITapGestureRecognizer(target: self, action: #selector(GamePlayVC.event1LabelTapped))
+        let event2LabelTap = UITapGestureRecognizer(target: self, action: #selector(GamePlayVC.event2LabelTapped))
+        let event3LabelTap = UITapGestureRecognizer(target: self, action: #selector(GamePlayVC.event3LabelTapped))
+        let event4LabelTap = UITapGestureRecognizer(target: self, action: #selector(GamePlayVC.event4LabelTapped))
+        
+        event1Label.isUserInteractionEnabled = false
+        event2Label.isUserInteractionEnabled = false
+        event3Label.isUserInteractionEnabled = false
+        event4Label.isUserInteractionEnabled = false
+        
+        event1Label.addGestureRecognizer(event1LabelTap)
+        event2Label.addGestureRecognizer(event2LabelTap)
+        event3Label.addGestureRecognizer(event3LabelTap)
+        event4Label.addGestureRecognizer(event4LabelTap)
+    }
+    
+    @objc func event1LabelTapped(sender:UITapGestureRecognizer) {
+    }
+    
+    @objc func event2LabelTapped(sender:UITapGestureRecognizer) {
+    }
+    
+    @objc func event3LabelTapped(sender:UITapGestureRecognizer) {
+    }
+    
+    @objc func event4LabelTapped(sender:UITapGestureRecognizer) {
     }
     
     // To achieve a status bar with white content
@@ -31,11 +65,25 @@ class GamePlayVC: UIViewController {
         return .lightContent
     }
     
-    // To return from Game Scores view back to Game Play view
-    @IBAction func unwindFromGameScoresVC(segue: UIStoryboardSegue) {
-        
+    //MARK:- IB Actions
+    @IBAction func fullDownButtonTapped(_ sender: Any) {
     }
-
+    
+    @IBAction func halfUpButton1Tapped(_ sender: Any) {
+    }
+    
+    @IBAction func halfDownButton1Tapped(_ sender: Any) {
+    }
+    
+    @IBAction func halfUpButton2Tapped(_ sender: Any) {
+    }
+    
+    @IBAction func halfDownButton2Tapped(_ sender: Any) {
+    }
+    
+    @IBAction func fullUpButtonTapped(_ sender: Any) {
+    }
+    
 
 }
 
