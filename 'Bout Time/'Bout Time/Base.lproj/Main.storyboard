@@ -11,10 +11,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Game PlayVC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="_Bout_Time" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="GamePlayVC" customModule="_Bout_Time" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -207,15 +207,23 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="event1Label" destination="X4a-CD-JEr" id="NBG-Oa-D5I"/>
+                        <outlet property="event2Label" destination="HzH-li-4uw" id="l6L-hU-mds"/>
+                        <outlet property="event3Label" destination="hfp-hh-JJj" id="Uob-03-Fgm"/>
+                        <outlet property="event4Label" destination="xya-x0-eqq" id="veC-se-FZ0"/>
+                        <outlet property="fullDownButton" destination="E2W-EM-oMG" id="n9h-Rl-Zx8"/>
+                        <outlet property="fullUpButton" destination="jDi-ae-iE4" id="4VD-i4-L0B"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="117.59999999999999" y="118.29085457271366"/>
         </scene>
-        <!--View Controller-->
+        <!--Game ScoresVC-->
         <scene sceneID="Fdl-zb-NN8">
             <objects>
-                <viewController id="Lxo-qD-QDI" sceneMemberID="viewController">
+                <viewController id="Lxo-qD-QDI" customClass="GameScoresVC" customModule="_Bout_Time" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="E0q-Me-hjw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -247,6 +255,9 @@
                                             <constraint firstAttribute="height" constant="55" id="Jtr-0U-OcS"/>
                                         </constraints>
                                         <state key="normal" image="play_again"/>
+                                        <connections>
+                                            <segue destination="NA1-cX-20Z" kind="unwind" unwindAction="unwindFromGameScoresVCWithSegue:" id="jA4-nR-YX3"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.1450980392" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -274,8 +285,50 @@
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M57-bQ-CdD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="NA1-cX-20Z" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="828" y="117.39130434782609"/>
+        </scene>
+        <!--Event Online InformationVC-->
+        <scene sceneID="BKS-7S-7s4">
+            <objects>
+                <viewController id="395-67-GvL" customClass="EventOnlineInformationVC" customModule="_Bout_Time" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="s1I-dJ-bpA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dqa-e8-b5L">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DJp-2u-zb4">
+                                        <rect key="frame" x="0.0" y="25" width="375" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="4ti-Hd-vRf"/>
+                                        </constraints>
+                                        <state key="normal" image="webview_bar"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="DJp-2u-zb4" firstAttribute="leading" secondItem="dqa-e8-b5L" secondAttribute="leading" id="ZHZ-Ix-nfT"/>
+                                    <constraint firstItem="DJp-2u-zb4" firstAttribute="top" secondItem="dqa-e8-b5L" secondAttribute="top" constant="25" id="jm2-Uh-eXE"/>
+                                    <constraint firstAttribute="trailing" secondItem="DJp-2u-zb4" secondAttribute="trailing" id="rgu-18-VC0"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="dqa-e8-b5L" firstAttribute="bottom" secondItem="5oc-cI-hrw" secondAttribute="bottom" id="acE-rf-7aK"/>
+                            <constraint firstItem="dqa-e8-b5L" firstAttribute="trailing" secondItem="5oc-cI-hrw" secondAttribute="trailing" id="ib5-KT-J30"/>
+                            <constraint firstItem="dqa-e8-b5L" firstAttribute="top" secondItem="s1I-dJ-bpA" secondAttribute="top" id="jId-2z-8eT"/>
+                            <constraint firstItem="dqa-e8-b5L" firstAttribute="leading" secondItem="5oc-cI-hrw" secondAttribute="leading" id="oZy-KI-bgO"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="5oc-cI-hrw"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rpj-dL-115" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1532" y="116.49175412293854"/>
         </scene>
     </scenes>
     <resources>
@@ -286,5 +339,6 @@
         <image name="play_again" width="450" height="142"/>
         <image name="up_full" width="158" height="457"/>
         <image name="up_half" width="158" height="229"/>
+        <image name="webview_bar" width="1333" height="167"/>
     </resources>
 </document>
