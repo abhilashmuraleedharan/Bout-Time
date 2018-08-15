@@ -15,7 +15,7 @@ protocol BoutPlayer {
     func playAgain()
 }
 
-class NewGamePlayer: BoutPlayer {
+class GamePlayer: BoutPlayer {
     var gamePoints = 0
     
     func moveEvent(_: GameControls) {

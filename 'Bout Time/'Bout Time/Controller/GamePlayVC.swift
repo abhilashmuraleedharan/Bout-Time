@@ -28,6 +28,24 @@ class GamePlayVC: UIViewController {
     @IBOutlet weak var successImage: UIImageView!
     @IBOutlet weak var failImage: UIImageView!
     
+    //MARK: - Stored Properties
+    let newGame: Game
+    var gameTimer: Timer!
+    
+    required init?(coder aDecoder: NSCoder) {
+        let player = GamePlayer()
+        let gameAudio = SoundGenerator()
+        
+        do {
+            let dictionary = try PlistConverter.dictionary(fromFile: "WorldEvents", ofType: "plist")
+            let gameEventsList = try EventsUnarchiver.gameEvents(fromDictionary: dictionary)
+            let eventsGenerator = RandomEventsGenerator(gameEvents: gameEventsList)
+            newGame = Game(havingRounds: 6, player: player, audio: gameAudio, eventsGenerator: eventsGenerator)
+        } catch let error {
+            fatalError("\(error)")
+        }
+        super.init(coder: aDecoder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +64,12 @@ class GamePlayVC: UIViewController {
         event2Label.addGestureRecognizer(event2LabelTap)
         event3Label.addGestureRecognizer(event3LabelTap)
         event4Label.addGestureRecognizer(event4LabelTap)
+        
+        newGame.eventsGenerator.printAllGameEvents()
+    }
+    
+    /// Timer Event Handler
+    @objc func timeOutHandler() {
     }
     
     @objc func event1LabelTapped(sender:UITapGestureRecognizer) {

@@ -73,6 +73,7 @@ protocol BoutEventsGenerator {
     var gameEvents: [BoutGameEvent] { get }
     init(gameEvents: [BoutGameEvent])
     func generateRandomGameEvents() -> [BoutGameEvent]
+    func printAllGameEvents()
 }
 
 class RandomEventsGenerator: BoutEventsGenerator {
@@ -100,5 +101,19 @@ class RandomEventsGenerator: BoutEventsGenerator {
             gameRoundEvents.append(gameEvents[indexOfSelectedEvent])
         }
         return gameRoundEvents
+    }
+    
+    /// Instance method to view all game events details
+    func printAllGameEvents() {
+        var i: Int = 1
+        for event in gameEvents {
+            print("Event \(i)")
+            print("------------------------------------")
+            print(event.getEventDescription())
+            print(event.getYearOfOccurrence())
+            print(event.getWebURL())
+            print("")
+            i += 1
+        }
     }
 }
