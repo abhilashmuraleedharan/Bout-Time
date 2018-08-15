@@ -18,10 +18,10 @@ class GamePlayVC: UIViewController {
     
     @IBOutlet weak var fullDownButton: UIButton!
     @IBOutlet weak var fullUpButton: UIButton!
-    @IBOutlet weak var halfUpButton1: UIButton!
-    @IBOutlet weak var halfDownButton1: UIButton!
-    @IBOutlet weak var halfUpButton2: UIButton!
-    @IBOutlet weak var halfDownButton2: UIButton!
+    @IBOutlet weak var halfUp1Button: UIButton!
+    @IBOutlet weak var halfDown1Button: UIButton!
+    @IBOutlet weak var halfUp2Button: UIButton!
+    @IBOutlet weak var halfDown2Button: UIButton!
     
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var promptLabel: UILabel!
@@ -69,16 +69,16 @@ class GamePlayVC: UIViewController {
     @IBAction func fullDownButtonTapped(_ sender: Any) {
     }
     
-    @IBAction func halfUpButton1Tapped(_ sender: Any) {
+    @IBAction func halfUp1ButtonTapped(_ sender: Any) {
     }
     
-    @IBAction func halfDownButton1Tapped(_ sender: Any) {
+    @IBAction func halfDown1ButtonTapped(_ sender: Any) {
     }
     
-    @IBAction func halfUpButton2Tapped(_ sender: Any) {
+    @IBAction func halfUp2ButtonTapped(_ sender: Any) {
     }
     
-    @IBAction func halfDownButton2Tapped(_ sender: Any) {
+    @IBAction func halfDown2ButtonTapped(_ sender: Any) {
     }
     
     @IBAction func fullUpButtonTapped(_ sender: Any) {

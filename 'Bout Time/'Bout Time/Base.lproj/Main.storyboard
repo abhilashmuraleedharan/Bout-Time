@@ -68,7 +68,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="55"/>
                                                                 <state key="normal" image="up_half"/>
                                                                 <connections>
-                                                                    <action selector="halfUpButton1Tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qjf-aM-10m"/>
+                                                                    <action selector="halfUp1ButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qjf-aM-10m"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OIk-GO-3rZ">
@@ -79,7 +79,7 @@
                                                                 </constraints>
                                                                 <state key="normal" image="down_half"/>
                                                                 <connections>
-                                                                    <action selector="halfDownButton1Tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Tq1-V0-i4o"/>
+                                                                    <action selector="halfDown1ButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Tq1-V0-i4o"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -106,7 +106,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="55"/>
                                                                 <state key="normal" image="up_half"/>
                                                                 <connections>
-                                                                    <action selector="halfUpButton2Tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AmF-af-6E0"/>
+                                                                    <action selector="halfUp2ButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AmF-af-6E0"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Aq-4a-Yck">
@@ -117,7 +117,7 @@
                                                                 </constraints>
                                                                 <state key="normal" image="down_half"/>
                                                                 <connections>
-                                                                    <action selector="halfDownButton2Tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aXI-W9-GpT"/>
+                                                                    <action selector="halfDown2ButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aXI-W9-GpT"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -233,10 +233,10 @@
                         <outlet property="failImage" destination="EwN-QI-owd" id="nBA-Tk-22W"/>
                         <outlet property="fullDownButton" destination="E2W-EM-oMG" id="n9h-Rl-Zx8"/>
                         <outlet property="fullUpButton" destination="jDi-ae-iE4" id="4VD-i4-L0B"/>
-                        <outlet property="halfDownButton1" destination="OIk-GO-3rZ" id="9Pb-X9-tja"/>
-                        <outlet property="halfDownButton2" destination="8Aq-4a-Yck" id="KUX-OJ-wsu"/>
-                        <outlet property="halfUpButton1" destination="nzR-Pq-aU2" id="tOp-ZE-s1S"/>
-                        <outlet property="halfUpButton2" destination="flB-cD-5bj" id="dos-Vz-uUO"/>
+                        <outlet property="halfDown1Button" destination="OIk-GO-3rZ" id="9Pb-X9-tja"/>
+                        <outlet property="halfDown2Button" destination="8Aq-4a-Yck" id="KUX-OJ-wsu"/>
+                        <outlet property="halfUp1Button" destination="nzR-Pq-aU2" id="tOp-ZE-s1S"/>
+                        <outlet property="halfUp2Button" destination="flB-cD-5bj" id="dos-Vz-uUO"/>
                         <outlet property="promptLabel" destination="Ujb-F2-6z0" id="tkK-JH-w9F"/>
                         <outlet property="successImage" destination="C4G-aN-SXE" id="lDs-De-idT"/>
                         <outlet property="timerLabel" destination="dTj-Ab-z9b" id="DS1-BU-fjA"/>
