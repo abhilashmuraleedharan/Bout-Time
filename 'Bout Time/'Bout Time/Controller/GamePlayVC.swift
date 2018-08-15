@@ -74,28 +74,129 @@ class GamePlayVC: UIViewController {
         startGame()
     }
     
+    // To achieve a status bar with white content
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
+    // To detect shake gesture
+    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+        if event?.subtype == motion {
+            endGameRound()
+        }
+    }
+    
     /// Timer Event Handler
     @objc func timeOutHandler() {
         secondsLeft -= 1
         timerLabel.text = "\(secondsLeft)"
         if (secondsLeft == 0) {
-            gameTimer.invalidate()
-            let result = boutGame.evaluateOrderOf(events: userSetEvents)
-            timerLabel.isHidden = true
-            disableControlButtonsUserInteractivity()
-            enableEventLabelsUserInteractivity()
-            promptLabel.text = "Tap events to learn more"
-            enableResultImagesUserInteractivity()
-            if result {
-                successImage.isHidden = false
-                failImage.isHidden = true
-                boutGame.audio.playSoundOf(.success)
-            } else {
-                successImage.isHidden = true
-                failImage.isHidden = false
-                boutGame.audio.playSoundOf(.failure)
-            }
+            endGameRound()
         }
+    }
+    
+    /// End current game round
+    func endGameRound() {
+        gameTimer.invalidate()
+        let result = boutGame.evaluateOrderOf(events: userSetEvents)
+        timerLabel.isHidden = true
+        disableControlButtonsUserInteractivity()
+        enableEventLabelsUserInteractivity()
+        promptLabel.text = "Tap events to learn more"
+        enableResultImagesUserInteractivity()
+        if result {
+            successImage.isHidden = false
+            failImage.isHidden = true
+            boutGame.audio.playSoundOf(.success)
+        } else {
+            successImage.isHidden = true
+            failImage.isHidden = false
+            boutGame.audio.playSoundOf(.failure)
+        }
+    }
+    
+    //MARK:- IB Actions
+    @IBAction func fullDownButtonTapped(_ sender: Any) {
+        arrangeEvents(.fullDown)
+    }
+    
+    @IBAction func halfUp1ButtonTapped(_ sender: Any) {
+        arrangeEvents(.halfUp1)
+    }
+    
+    @IBAction func halfDown1ButtonTapped(_ sender: Any) {
+        arrangeEvents(.halfDown1)
+    }
+    
+    @IBAction func halfUp2ButtonTapped(_ sender: Any) {
+        arrangeEvents(.halfUp2)
+    }
+    
+    @IBAction func halfDown2ButtonTapped(_ sender: Any) {
+        arrangeEvents(.halfDown2)
+    }
+    
+    @IBAction func fullUpButtonTapped(_ sender: Any) {
+        arrangeEvents(.fullUp)
+    }
+    
+    //MARK: - Methods
+    func startGame() {
+        boutGame.playerScore = 0
+        boutGame.roundsCompleted = 0
+        startNewRoundOfGame()
+    }
+    
+    func checkAndProceedToNextRound() {
+        if boutGame.roundsCompleted > boutGame.roundsPerGame {
+            gameOver()
+        } else {
+            startNewRoundOfGame()
+        }
+    }
+    
+    func gameOver() {
+        
+    }
+    
+    func startNewRoundOfGame() {
+        successImage.isHidden = true
+        failImage.isHidden = true
+        disableEventLabelsUserInteractivity()
+        disableResultImagesUserInteractivity()
+        resetTimer()
+        timerLabel.isHidden = false
+        startTimer()
+        enableControlButtonsUserInteractivity()
+        userSetEvents = boutGame.eventsGenerator.generateRandomGameEvents()
+        presentEvents()
+        promptLabel.text = "Shake to complete"
+        boutGame.roundsCompleted += 1
+    }
+    
+    func presentEvents() {
+        event1Label.text = userSetEvents[0].description
+        event2Label.text = userSetEvents[1].description
+        event3Label.text = userSetEvents[2].description
+        event4Label.text = userSetEvents[3].description
+    }
+    
+    func arrangeEvents(_ controlButton: GameControls) {
+        switch controlButton {
+        case .fullDown:
+            userSetEvents.swapAt(0, 1)
+        case .halfUp1:
+            userSetEvents.swapAt(1, 0)
+        case .halfDown1:
+            userSetEvents.swapAt(1, 2)
+        case .halfUp2:
+            userSetEvents.swapAt(2, 1)
+        case .halfDown2:
+            userSetEvents.swapAt(2, 3)
+        case .fullUp:
+            userSetEvents.swapAt(3, 2)
+        }
+        presentEvents()
     }
     
     /// Disable labels user interactivity
@@ -146,6 +247,21 @@ class GamePlayVC: UIViewController {
         halfDown2Button.isUserInteractionEnabled = true
     }
     
+    /// Reset Timer
+    func resetTimer() {
+        secondsLeft = 60
+        timerRunning = false
+    }
+    
+    /// Start Timer
+    func startTimer() {
+        timerLabel.text = "\(secondsLeft)"
+        if !timerRunning {
+            gameTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timeOutHandler), userInfo: nil, repeats: true)
+            timerRunning = true
+        }
+    }
+    
     @objc func event1LabelTapped(sender: UITapGestureRecognizer) {
     }
     
@@ -162,125 +278,5 @@ class GamePlayVC: UIViewController {
     {
         checkAndProceedToNextRound()
     }
-    
-    // To achieve a status bar with white content
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-    
-    //MARK:- IB Actions
-    @IBAction func fullDownButtonTapped(_ sender: Any) {
-        arrangeEvents(.fullDown)
-    }
-    
-    @IBAction func halfUp1ButtonTapped(_ sender: Any) {
-        arrangeEvents(.halfUp1)
-    }
-    
-    @IBAction func halfDown1ButtonTapped(_ sender: Any) {
-        arrangeEvents(.halfDown1)
-    }
-    
-    @IBAction func halfUp2ButtonTapped(_ sender: Any) {
-        arrangeEvents(.halfUp2)
-    }
-    
-    @IBAction func halfDown2ButtonTapped(_ sender: Any) {
-        arrangeEvents(.halfDown2)
-    }
-    
-    @IBAction func fullUpButtonTapped(_ sender: Any) {
-        arrangeEvents(.fullUp)
-    }
-    
-    /// Reset Timer
-    func resetTimer() {
-        secondsLeft = 60
-        timerRunning = false
-    }
-    
-    /// Start Timer
-    func startTimer() {
-        timerLabel.text = "\(secondsLeft)"
-        if !timerRunning {
-            gameTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timeOutHandler), userInfo: nil, repeats: true)
-            timerRunning = true
-        }
-    }
-    
-    //MARK: - Methods
-    func startGame() {
-        boutGame.playerScore = 0
-        boutGame.roundsCompleted = 0
-        startNewRoundOfGame()
-    }
-    
-    func checkAndProceedToNextRound() {
-        if boutGame.roundsCompleted > boutGame.roundsPerGame {
-            gameOver()
-        } else {
-            startNewRoundOfGame()
-        }
-    }
-    
-    func gameOver() {
-        
-    }
-    
-    func startNewRoundOfGame() {
-        successImage.isHidden = true
-        failImage.isHidden = true
-        disableEventLabelsUserInteractivity()
-        disableResultImagesUserInteractivity()
-        resetTimer()
-        timerLabel.isHidden = false
-        startTimer()
-        userSetEvents = boutGame.eventsGenerator.generateRandomGameEvents()
-        presentEvents()
-        promptLabel.text = "Shake to complete"
-        boutGame.roundsCompleted += 1
-    }
-    
-    func presentEvents() {
-        event1Label.text = userSetEvents[0].description
-        event2Label.text = userSetEvents[1].description
-        event3Label.text = userSetEvents[2].description
-        event4Label.text = userSetEvents[3].description
-    }
-    
-    func arrangeEvents(_ controlButton: GameControls) {
-        switch controlButton {
-        case .fullDown:
-            // swap(userSetEvents[0], with: userSetEvents[1])
-            userSetEvents.swapAt(0, 1)
-        case .halfUp1:
-            // swap(userSetEvents[1], with: userSetEvents[0])
-            userSetEvents.swapAt(1, 0)
-        case .halfDown1:
-            // swap(userSetEvents[1], with: userSetEvents[2])
-            userSetEvents.swapAt(1, 2)
-        case .halfUp2:
-            // swap(userSetEvents[2], with: userSetEvents[1])
-            userSetEvents.swapAt(2, 1)
-        case .halfDown2:
-            // swap(userSetEvents[2], with: userSetEvents[3])
-            userSetEvents.swapAt(2, 3)
-        case .fullUp:
-            // swap(userSetEvents[3], with: userSetEvents[2])
-            userSetEvents.swapAt(3, 2)
-        }
-        presentEvents()
-    }
-    
-    /*
-    func swap(_ event1: BoutGameEvent, with event2: BoutGameEvent) {
-        var tempEvent: BoutGameEvent
-        var eventA = event1
-        var eventB = event2
-        tempEvent = eventA
-        eventA = eventB
-        eventB = tempEvent
-    } */
-    
 }
 
