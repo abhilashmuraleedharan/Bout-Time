@@ -9,7 +9,7 @@
 import Foundation
 import GameKit
 
-protocol Event {
+protocol BoutGameEvent {
     var eventDescription: String { get set }
     var yearOfOccurrence: Int { get set }
     var webURL: String { get set }
@@ -19,7 +19,7 @@ protocol Event {
     func getWebURL() -> String
 }
 
-struct GameEvent: Event {
+struct Event: BoutGameEvent {
     var eventDescription: String
     var yearOfOccurrence: Int
     var webURL: String
@@ -37,7 +37,7 @@ struct GameEvent: Event {
     }
 }
 
-enum EventsGeneratorError: Error {
+enum BoutGameEventsGeneratorError: Error {
     case invalidResource
     case conversionFailure
     case invalidYearFormat
@@ -46,48 +46,48 @@ enum EventsGeneratorError: Error {
 class PlistConverter {
     static func dictionary(fromFile name: String, ofType type: String) throws -> [String: [String]] {
         guard let path = Bundle.main.path(forResource: name, ofType: type) else {
-            throw EventsGeneratorError.invalidResource
+            throw BoutGameEventsGeneratorError.invalidResource
         }
         guard let dictionary = NSDictionary(contentsOfFile: path) as? [String: [String]] else {
-            throw EventsGeneratorError.conversionFailure
+            throw BoutGameEventsGeneratorError.conversionFailure
         }
         return dictionary
     }
 }
 
 class EventsUnarchiver {
-    static func gameEvents(fromDictionary dictionary: [String:[String]]) throws -> [Event] {
+    static func gameEvents(fromDictionary dictionary: [String:[String]]) throws -> [BoutGameEvent] {
         var events = [Event]()
         for (key, value) in dictionary {
             if let year = Int(value[0]) {
-                events.append(GameEvent(eventDescription: key, yearOfOccurrence: year, webURL: value[1]))
+                events.append(Event(eventDescription: key, yearOfOccurrence: year, webURL: value[1]))
             } else {
-                throw EventsGeneratorError.invalidYearFormat
+                throw BoutGameEventsGeneratorError.invalidYearFormat
             }
         }
         return events
     }
 }
 
-protocol EventsGenerator {
-    var gameEvents: [Event] { get }
-    init(gameEvents: [Event])
-    func generateRandomGameEvents() -> [Event]
+protocol BoutEventsGenerator {
+    var gameEvents: [BoutGameEvent] { get }
+    init(gameEvents: [BoutGameEvent])
+    func generateRandomGameEvents() -> [BoutGameEvent]
 }
 
-class RandomEventsGenerator: EventsGenerator {
-    let gameEvents: [Event]
+class RandomEventsGenerator: BoutEventsGenerator {
+    let gameEvents: [BoutGameEvent]  // Contains the whole set of events for the game
     let eventsPerRound = 4
     var indexOfSelectedEvent: Int = 0
     var eventsPresentedIndexes = [Int]()  // To keep track of indices of events that's already presented in a round
     
-    required init(gameEvents: [Event]) {
+    required init(gameEvents: [BoutGameEvent]) {
         self.gameEvents = gameEvents
     }
     
     /// Instance method to get a set of 4 random events
-    func generateRandomGameEvents() -> [Event] {
-        var gameRoundEvents = [Event]()
+    func generateRandomGameEvents() -> [BoutGameEvent] {
+        var gameRoundEvents = [BoutGameEvent]()
         eventsPresentedIndexes = []
         for _ in 1...eventsPerRound {
             indexOfSelectedEvent = GKRandomSource.sharedRandom().nextInt(upperBound: gameEvents.count)
