@@ -31,6 +31,8 @@ class GamePlayVC: UIViewController {
     //MARK: - Stored Properties
     let newGame: Game
     var gameTimer: Timer!
+    var timerRunning: Bool = false
+    var secondsLeft = 60
     
     required init?(coder aDecoder: NSCoder) {
         let player = GamePlayer()
@@ -55,21 +57,34 @@ class GamePlayVC: UIViewController {
         let event3LabelTap = UITapGestureRecognizer(target: self, action: #selector(GamePlayVC.event3LabelTapped))
         let event4LabelTap = UITapGestureRecognizer(target: self, action: #selector(GamePlayVC.event4LabelTapped))
         
-        event1Label.isUserInteractionEnabled = false
-        event2Label.isUserInteractionEnabled = false
-        event3Label.isUserInteractionEnabled = false
-        event4Label.isUserInteractionEnabled = false
+        disableEventLabels()
         
         event1Label.addGestureRecognizer(event1LabelTap)
         event2Label.addGestureRecognizer(event2LabelTap)
         event3Label.addGestureRecognizer(event3LabelTap)
         event4Label.addGestureRecognizer(event4LabelTap)
+
         
-        newGame.eventsGenerator.printAllGameEvents()
     }
     
     /// Timer Event Handler
     @objc func timeOutHandler() {
+    }
+    
+    /// Disable labels user interactivity
+    func disableEventLabels() {
+        event1Label.isUserInteractionEnabled = false
+        event2Label.isUserInteractionEnabled = false
+        event3Label.isUserInteractionEnabled = false
+        event4Label.isUserInteractionEnabled = false
+    }
+    
+    /// Enable labels user interactivity
+    func enableEventLabels() {
+        event1Label.isUserInteractionEnabled = true
+        event2Label.isUserInteractionEnabled = true
+        event3Label.isUserInteractionEnabled = true
+        event4Label.isUserInteractionEnabled = true
     }
     
     @objc func event1LabelTapped(sender:UITapGestureRecognizer) {

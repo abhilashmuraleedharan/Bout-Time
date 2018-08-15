@@ -10,31 +10,15 @@ import Foundation
 import GameKit
 
 protocol BoutGameEvent {
-    var eventDescription: String { get set }
+    var description: String { get set }
     var yearOfOccurrence: Int { get set }
     var webURL: String { get set }
-    
-    func getEventDescription() -> String
-    func getYearOfOccurrence() -> Int
-    func getWebURL() -> String
 }
 
 struct Event: BoutGameEvent {
-    var eventDescription: String
+    var description: String
     var yearOfOccurrence: Int
     var webURL: String
-    
-    func getEventDescription() -> String {
-        return eventDescription
-    }
-    
-    func getYearOfOccurrence() -> Int {
-        return yearOfOccurrence
-    }
-    
-    func getWebURL() -> String {
-        return webURL
-    }
 }
 
 enum BoutGameEventsGeneratorError: Error {
@@ -60,7 +44,7 @@ class EventsUnarchiver {
         var events = [Event]()
         for (key, value) in dictionary {
             if let year = Int(value[0]) {
-                events.append(Event(eventDescription: key, yearOfOccurrence: year, webURL: value[1]))
+                events.append(Event(description: key, yearOfOccurrence: year, webURL: value[1]))
             } else {
                 throw BoutGameEventsGeneratorError.invalidYearFormat
             }
@@ -109,9 +93,9 @@ class RandomEventsGenerator: BoutEventsGenerator {
         for event in gameEvents {
             print("Event \(i)")
             print("------------------------------------")
-            print(event.getEventDescription())
-            print(event.getYearOfOccurrence())
-            print(event.getWebURL())
+            print(event.description)
+            print(event.yearOfOccurrence)
+            print(event.webURL)
             print("")
             i += 1
         }

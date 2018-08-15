@@ -6,9 +6,6 @@
 //  Copyright © 2018 AbhilashApps. All rights reserved.
 //
 
-import Foundation
-import UIKit
-
 enum GameControls: String {
     case fullUp
     case halfUp1
@@ -18,75 +15,39 @@ enum GameControls: String {
     case fullDown
 }
 
-enum TimerAction {
-    case start
-    case stop
-}
-
-enum GameState {
-    case begin
-    case end
-}
-
 protocol BoutGame {
-    var player: BoutPlayer { get set }
+    var playerScore: Int { get set }
     var audio: SoundGeneratable { get set }
     var roundsPerGame: Int { get }
     var eventsGenerator: BoutEventsGenerator { get set }
     
-    func game(_ : GameState)
-    func presentEvents()
-    func timer(_ : TimerAction, timer: Timer)
-    func moveEventLabel(_ : GameControls)
     func evaluateOrderOf(events: [BoutGameEvent]) -> Bool
-    func displayResult()
-    func restartGame()
-    func resumePlay()
 }
 
 class Game: BoutGame {
-    var player: BoutPlayer
+    var playerScore: Int
     var audio: SoundGeneratable
     let roundsPerGame: Int
     var eventsGenerator: BoutEventsGenerator
     
-    init(havingRounds rounds: Int, player : BoutPlayer, audio: SoundGeneratable, eventsGenerator: BoutEventsGenerator) {
-        self.player = player
+    init(havingRounds rounds: Int, playerScore: Int, audio: SoundGeneratable, eventsGenerator: BoutEventsGenerator) {
+        self.playerScore = playerScore
         self.audio = audio
         self.eventsGenerator = eventsGenerator
         self.roundsPerGame = rounds
     }
     
-    func game(_: GameState) {
-        
-    }
-    
-    func presentEvents() {
-        
-    }
-    
-    func timer(_: TimerAction, timer: Timer) {
-        
-    }
-    
-    func moveEventLabel(_: GameControls) {
-        
-    }
-    
     func evaluateOrderOf(events: [BoutGameEvent]) -> Bool {
-        let result = false
-        return result
-    }
-    
-    func displayResult() {
-        
-    }
-    
-    func restartGame() {
-        
-    }
-    
-    func resumePlay() {
-        
+        var correctOrderOfYears = [Int]()
+        var presentedOrderOfYears = [Int]()
+        for event in events {
+            presentedOrderOfYears.append(event.yearOfOccurrence)
+        }
+        // Sort game events in ascending order based on their year of occurrence and store the sorted array to a new collection
+        let eventsInAscendingOrderOfOccurrence = events.sorted{ $0.yearOfOccurrence < $1.yearOfOccurrence }
+        for event in eventsInAscendingOrderOfOccurrence {
+            correctOrderOfYears.append(event.yearOfOccurrence)
+        }
+        return correctOrderOfYears == presentedOrderOfYears ? true : false
     }
 }
