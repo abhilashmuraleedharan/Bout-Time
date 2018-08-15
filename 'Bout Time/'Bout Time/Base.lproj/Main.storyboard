@@ -241,7 +241,6 @@
                         <outlet property="successImage" destination="C4G-aN-SXE" id="lDs-De-idT"/>
                         <outlet property="timerLabel" destination="dTj-Ab-z9b" id="DS1-BU-fjA"/>
                         <segue destination="Lxo-qD-QDI" kind="show" identifier="gameScoresVCSegue" id="1nw-zR-UWv"/>
-                        <segue destination="395-67-GvL" kind="presentation" identifier="EventOnlineInfoVCModelSegue" id="lde-zS-K39"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -320,50 +319,6 @@
             </objects>
             <point key="canvasLocation" x="828" y="117.39130434782609"/>
         </scene>
-        <!--Event Online InformationVC-->
-        <scene sceneID="BKS-7S-7s4">
-            <objects>
-                <viewController id="395-67-GvL" customClass="EventOnlineInformationVC" customModule="_Bout_Time" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="s1I-dJ-bpA">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dqa-e8-b5L">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DJp-2u-zb4">
-                                        <rect key="frame" x="0.0" y="25" width="375" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="4ti-Hd-vRf"/>
-                                        </constraints>
-                                        <state key="normal" image="webview_bar"/>
-                                        <connections>
-                                            <action selector="closeButtonTapped:" destination="395-67-GvL" eventType="touchUpInside" id="3Ct-va-8xl"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="DJp-2u-zb4" firstAttribute="leading" secondItem="dqa-e8-b5L" secondAttribute="leading" id="ZHZ-Ix-nfT"/>
-                                    <constraint firstItem="DJp-2u-zb4" firstAttribute="top" secondItem="dqa-e8-b5L" secondAttribute="top" constant="25" id="jm2-Uh-eXE"/>
-                                    <constraint firstAttribute="trailing" secondItem="DJp-2u-zb4" secondAttribute="trailing" id="rgu-18-VC0"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="dqa-e8-b5L" firstAttribute="bottom" secondItem="5oc-cI-hrw" secondAttribute="bottom" id="acE-rf-7aK"/>
-                            <constraint firstItem="dqa-e8-b5L" firstAttribute="trailing" secondItem="5oc-cI-hrw" secondAttribute="trailing" id="ib5-KT-J30"/>
-                            <constraint firstItem="dqa-e8-b5L" firstAttribute="top" secondItem="s1I-dJ-bpA" secondAttribute="top" id="jId-2z-8eT"/>
-                            <constraint firstItem="dqa-e8-b5L" firstAttribute="leading" secondItem="5oc-cI-hrw" secondAttribute="leading" id="oZy-KI-bgO"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="5oc-cI-hrw"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Rpj-dL-115" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1532" y="116.49175412293854"/>
-        </scene>
     </scenes>
     <resources>
         <image name="down_full" width="158" height="457"/>
@@ -373,6 +328,5 @@
         <image name="play_again" width="450" height="142"/>
         <image name="up_full" width="158" height="457"/>
         <image name="up_half" width="158" height="229"/>
-        <image name="webview_bar" width="1333" height="167"/>
     </resources>
 </document>

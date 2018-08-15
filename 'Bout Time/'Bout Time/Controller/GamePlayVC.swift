@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class GamePlayVC: UIViewController {
 
@@ -48,6 +49,7 @@ class GamePlayVC: UIViewController {
         super.init(coder: aDecoder)
     }
     
+    //MARK: - Override methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -88,39 +90,10 @@ class GamePlayVC: UIViewController {
         }
     }
     
+    // To pass data to another view controller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let gameScoresVC = segue.destination as? GameScoresVC {
             gameScoresVC.boutGame = boutGame
-        }
-    }
-    
-    /// Timer Event Handler
-    @objc func timeOutHandler() {
-        secondsLeft -= 1
-        timerLabel.text = "\(secondsLeft)"
-        if (secondsLeft == 0) {
-            endGameRound()
-        }
-    }
-    
-    /// End current game round
-    func endGameRound() {
-        gameTimer.invalidate()
-        let result = boutGame.evaluateOrderOf(events: userSetEvents)
-        timerLabel.isHidden = true
-        disableControlButtonsUserInteractivity()
-        enableEventLabelsUserInteractivity()
-        promptLabel.text = "Tap events to learn more"
-        enableResultImagesUserInteractivity()
-        if result {
-            successImage.isHidden = false
-            failImage.isHidden = true
-            boutGame.audio.playSoundOf(.success)
-            boutGame.playerScore += 1
-        } else {
-            successImage.isHidden = true
-            failImage.isHidden = false
-            boutGame.audio.playSoundOf(.failure)
         }
     }
     
@@ -163,7 +136,7 @@ class GamePlayVC: UIViewController {
     }
     
     func checkAndProceedToNextRound() {
-        if boutGame.roundsCompleted > boutGame.roundsPerGame {
+        if boutGame.roundsCompleted == boutGame.roundsPerGame {
             gameOver()
         } else {
             startNewRoundOfGame()
@@ -263,6 +236,37 @@ class GamePlayVC: UIViewController {
         halfDown2Button.isUserInteractionEnabled = true
     }
     
+    /// Timer Event Handler
+    @objc func timeOutHandler() {
+        secondsLeft -= 1
+        timerLabel.text = "\(secondsLeft)"
+        if (secondsLeft == 0) {
+            endGameRound()
+        }
+    }
+    
+    /// End current game round
+    func endGameRound() {
+        gameTimer.invalidate()
+        let result = boutGame.evaluateOrderOf(events: userSetEvents)
+        timerLabel.isHidden = true
+        disableControlButtonsUserInteractivity()
+        enableEventLabelsUserInteractivity()
+        promptLabel.text = "Tap events to learn more"
+        enableResultImagesUserInteractivity()
+        if result {
+            successImage.isHidden = false
+            failImage.isHidden = true
+            boutGame.audio.playSoundOf(.success)
+            boutGame.playerScore += 1
+        } else {
+            successImage.isHidden = true
+            failImage.isHidden = false
+            boutGame.audio.playSoundOf(.failure)
+        }
+    }
+    
+    
     /// Reset Timer
     func resetTimer() {
         secondsLeft = 60
@@ -295,20 +299,32 @@ class GamePlayVC: UIViewController {
     }
     
     @objc func event1LabelTapped(sender: UITapGestureRecognizer) {
+        showWebsite(url: userSetEvents[0].webURL)
     }
     
     @objc func event2LabelTapped(sender: UITapGestureRecognizer) {
+        showWebsite(url: userSetEvents[1].webURL)
     }
     
     @objc func event3LabelTapped(sender: UITapGestureRecognizer) {
+        showWebsite(url: userSetEvents[2].webURL)
     }
     
     @objc func event4LabelTapped(sender: UITapGestureRecognizer) {
+        showWebsite(url: userSetEvents[3].webURL)
     }
     
     @objc func resultImageTapped(sender: UITapGestureRecognizer)
     {
         checkAndProceedToNextRound()
+    }
+    
+    /// Show WebPage with SFSafariViewController
+    func showWebsite(url: String) {
+        if let webURL = NSURL(string: url) {
+            let safariVC = SFSafariViewController(url: webURL as URL)
+            present(safariVC, animated: true, completion: nil)
+        }
     }
     
     func deselectAllControlButtons() {
