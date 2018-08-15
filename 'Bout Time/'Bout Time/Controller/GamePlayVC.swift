@@ -71,6 +71,9 @@ class GamePlayVC: UIViewController {
         disableEventLabelsUserInteractivity()
         disableResultImagesUserInteractivity()
         
+        // Add selected state images for control buttons
+        addSelectedStateImagesForButtons()
+        
         startGame()
     }
     
@@ -83,6 +86,12 @@ class GamePlayVC: UIViewController {
     override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
         if event?.subtype == motion {
             endGameRound()
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let gameScoresVC = segue.destination as? GameScoresVC {
+            gameScoresVC.boutGame = boutGame
         }
     }
     
@@ -156,7 +165,7 @@ class GamePlayVC: UIViewController {
     }
     
     func gameOver() {
-        
+        performSegue(withIdentifier: "gameScoresVCSegue", sender: self)
     }
     
     func startNewRoundOfGame() {
@@ -245,6 +254,11 @@ class GamePlayVC: UIViewController {
         halfDown1Button.isUserInteractionEnabled = true
         halfUp2Button.isUserInteractionEnabled = true
         halfDown2Button.isUserInteractionEnabled = true
+    }
+    
+    func addSelectedStateImagesForButtons() {
+        // myButton.setImage(UIImage(named : "selectedImage"), forState: UIControlState.Selected)
+        fullUpButton.setImage(UIImage(named: "up_full_selected"), for: .selected)
     }
     
     /// Reset Timer

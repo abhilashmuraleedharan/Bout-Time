@@ -13,8 +13,13 @@ class GameScoresVC: UIViewController {
     //MARK: - IB Outlets
     @IBOutlet weak var scoresLabel: UILabel!
     
+    var boutGame: Game?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let game = boutGame {
+            scoresLabel.text = "\(game.playerScore)/\(game.roundsPerGame)"
+        }
     }
     
     // To achieve a status bar with white content
