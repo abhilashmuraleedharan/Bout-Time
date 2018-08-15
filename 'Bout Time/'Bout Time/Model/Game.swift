@@ -6,7 +6,7 @@
 //  Copyright © 2018 AbhilashApps. All rights reserved.
 //
 
-enum GameControls: String {
+enum GameControls {
     case fullUp
     case halfUp1
     case halfDown1
