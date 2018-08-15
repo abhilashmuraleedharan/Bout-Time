@@ -61,13 +61,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		CC28D5AD212324C400628699 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		CC28D5AE212324CC00628699 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -98,7 +91,6 @@
 			isa = PBXGroup;
 			children = (
 				CC28D5AC212324BA00628699 /* Model */,
-				CC28D5AD212324C400628699 /* View */,
 				CC28D5AE212324CC00628699 /* Controller */,
 				CCF871F62121A3F100FD9450 /* CorrectDing.wav */,
 				CCF871F72121A3F100FD9450 /* IncorrectBuzz.wav */,

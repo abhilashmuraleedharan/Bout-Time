@@ -29,20 +29,19 @@ class GamePlayVC: UIViewController {
     @IBOutlet weak var failImage: UIImageView!
     
     //MARK: - Stored Properties
-    let newGame: Game
+    let boutGame: Game
     var gameTimer: Timer!
     var timerRunning: Bool = false
     var secondsLeft = 60
+    var userSetEvents = [BoutGameEvent]()
     
     required init?(coder aDecoder: NSCoder) {
-        let player = GamePlayer()
         let gameAudio = SoundGenerator()
-        
         do {
             let dictionary = try PlistConverter.dictionary(fromFile: "WorldEvents", ofType: "plist")
             let gameEventsList = try EventsUnarchiver.gameEvents(fromDictionary: dictionary)
             let eventsGenerator = RandomEventsGenerator(gameEvents: gameEventsList)
-            newGame = Game(havingRounds: 6, player: player, audio: gameAudio, eventsGenerator: eventsGenerator)
+            boutGame = Game(havingRounds: 6, audio: gameAudio, eventsGenerator: eventsGenerator)
         } catch let error {
             fatalError("\(error)")
         }
@@ -52,27 +51,55 @@ class GamePlayVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let event1LabelTap = UITapGestureRecognizer(target: self, action: #selector(GamePlayVC.event1LabelTapped))
-        let event2LabelTap = UITapGestureRecognizer(target: self, action: #selector(GamePlayVC.event2LabelTapped))
-        let event3LabelTap = UITapGestureRecognizer(target: self, action: #selector(GamePlayVC.event3LabelTapped))
-        let event4LabelTap = UITapGestureRecognizer(target: self, action: #selector(GamePlayVC.event4LabelTapped))
+        // Set up Gesture Recognizers for non control UI elements
+        let event1LabelTap = UITapGestureRecognizer(target: self, action: #selector(event1LabelTapped))
+        let event2LabelTap = UITapGestureRecognizer(target: self, action: #selector(event2LabelTapped))
+        let event3LabelTap = UITapGestureRecognizer(target: self, action: #selector(event3LabelTapped))
+        let event4LabelTap = UITapGestureRecognizer(target: self, action: #selector(event4LabelTapped))
+        let successImageTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(resultImageTapped))
+        let failImageTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(resultImageTapped))
         
-        disableEventLabels()
-        
+        // Assign Gesture Recognizers
         event1Label.addGestureRecognizer(event1LabelTap)
         event2Label.addGestureRecognizer(event2LabelTap)
         event3Label.addGestureRecognizer(event3LabelTap)
         event4Label.addGestureRecognizer(event4LabelTap)
-
+        successImage.addGestureRecognizer(successImageTapRecognizer)
+        failImage.addGestureRecognizer(failImageTapRecognizer)
         
+        // Disable user interactivity of non control ui elements
+        disableEventLabelsUserInteractivity()
+        disableResultImagesUserInteractivity()
+        
+        startGame()
     }
     
     /// Timer Event Handler
     @objc func timeOutHandler() {
+        secondsLeft -= 1
+        timerLabel.text = "\(secondsLeft)"
+        if (secondsLeft == 0) {
+            gameTimer.invalidate()
+            let result = boutGame.evaluateOrderOf(events: userSetEvents)
+            timerLabel.isHidden = true
+            disableControlButtonsUserInteractivity()
+            enableEventLabelsUserInteractivity()
+            promptLabel.text = "Tap events to learn more"
+            enableResultImagesUserInteractivity()
+            if result {
+                successImage.isHidden = false
+                failImage.isHidden = true
+                boutGame.audio.playSoundOf(.success)
+            } else {
+                successImage.isHidden = true
+                failImage.isHidden = false
+                boutGame.audio.playSoundOf(.failure)
+            }
+        }
     }
     
     /// Disable labels user interactivity
-    func disableEventLabels() {
+    func disableEventLabelsUserInteractivity() {
         event1Label.isUserInteractionEnabled = false
         event2Label.isUserInteractionEnabled = false
         event3Label.isUserInteractionEnabled = false
@@ -80,23 +107,60 @@ class GamePlayVC: UIViewController {
     }
     
     /// Enable labels user interactivity
-    func enableEventLabels() {
+    func enableEventLabelsUserInteractivity() {
         event1Label.isUserInteractionEnabled = true
         event2Label.isUserInteractionEnabled = true
         event3Label.isUserInteractionEnabled = true
         event4Label.isUserInteractionEnabled = true
     }
     
-    @objc func event1LabelTapped(sender:UITapGestureRecognizer) {
+    /// Disable Result Images User Interactivity
+    func disableResultImagesUserInteractivity() {
+        successImage.isUserInteractionEnabled = false
+        failImage.isUserInteractionEnabled = false
     }
     
-    @objc func event2LabelTapped(sender:UITapGestureRecognizer) {
+    /// Enable Result Images User Interactivity
+    func enableResultImagesUserInteractivity(){
+        successImage.isUserInteractionEnabled = true
+        failImage.isUserInteractionEnabled = true
     }
     
-    @objc func event3LabelTapped(sender:UITapGestureRecognizer) {
+    /// Disable Control buttons User Interactivity
+    func disableControlButtonsUserInteractivity() {
+        fullUpButton.isUserInteractionEnabled = false
+        fullDownButton.isUserInteractionEnabled = false
+        halfUp1Button.isUserInteractionEnabled = false
+        halfDown1Button.isUserInteractionEnabled = false
+        halfUp2Button.isUserInteractionEnabled = false
+        halfDown2Button.isUserInteractionEnabled = false
     }
     
-    @objc func event4LabelTapped(sender:UITapGestureRecognizer) {
+    /// Enable Control Buttons User Interactivity
+    func enableControlButtonsUserInteractivity() {
+        fullUpButton.isUserInteractionEnabled = true
+        fullDownButton.isUserInteractionEnabled = true
+        halfUp1Button.isUserInteractionEnabled = true
+        halfDown1Button.isUserInteractionEnabled = true
+        halfUp2Button.isUserInteractionEnabled = true
+        halfDown2Button.isUserInteractionEnabled = true
+    }
+    
+    @objc func event1LabelTapped(sender: UITapGestureRecognizer) {
+    }
+    
+    @objc func event2LabelTapped(sender: UITapGestureRecognizer) {
+    }
+    
+    @objc func event3LabelTapped(sender: UITapGestureRecognizer) {
+    }
+    
+    @objc func event4LabelTapped(sender: UITapGestureRecognizer) {
+    }
+    
+    @objc func resultImageTapped(sender: UITapGestureRecognizer)
+    {
+        checkAndProceedToNextRound()
     }
     
     // To achieve a status bar with white content
@@ -106,23 +170,117 @@ class GamePlayVC: UIViewController {
     
     //MARK:- IB Actions
     @IBAction func fullDownButtonTapped(_ sender: Any) {
+        arrangeEvents(.fullDown)
     }
     
     @IBAction func halfUp1ButtonTapped(_ sender: Any) {
+        arrangeEvents(.halfUp1)
     }
     
     @IBAction func halfDown1ButtonTapped(_ sender: Any) {
+        arrangeEvents(.halfDown1)
     }
     
     @IBAction func halfUp2ButtonTapped(_ sender: Any) {
+        arrangeEvents(.halfUp2)
     }
     
     @IBAction func halfDown2ButtonTapped(_ sender: Any) {
+        arrangeEvents(.halfDown2)
     }
     
     @IBAction func fullUpButtonTapped(_ sender: Any) {
+        arrangeEvents(.fullUp)
     }
     
-
+    /// Reset Timer
+    func resetTimer() {
+        secondsLeft = 60
+        timerRunning = false
+    }
+    
+    /// Start Timer
+    func startTimer() {
+        timerLabel.text = "\(secondsLeft)"
+        if !timerRunning {
+            gameTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timeOutHandler), userInfo: nil, repeats: true)
+            timerRunning = true
+        }
+    }
+    
+    //MARK: - Methods
+    func startGame() {
+        boutGame.playerScore = 0
+        boutGame.roundsCompleted = 0
+        startNewRoundOfGame()
+    }
+    
+    func checkAndProceedToNextRound() {
+        if boutGame.roundsCompleted > boutGame.roundsPerGame {
+            gameOver()
+        } else {
+            startNewRoundOfGame()
+        }
+    }
+    
+    func gameOver() {
+        
+    }
+    
+    func startNewRoundOfGame() {
+        successImage.isHidden = true
+        failImage.isHidden = true
+        disableEventLabelsUserInteractivity()
+        disableResultImagesUserInteractivity()
+        resetTimer()
+        timerLabel.isHidden = false
+        startTimer()
+        userSetEvents = boutGame.eventsGenerator.generateRandomGameEvents()
+        presentEvents()
+        promptLabel.text = "Shake to complete"
+        boutGame.roundsCompleted += 1
+    }
+    
+    func presentEvents() {
+        event1Label.text = userSetEvents[0].description
+        event2Label.text = userSetEvents[1].description
+        event3Label.text = userSetEvents[2].description
+        event4Label.text = userSetEvents[3].description
+    }
+    
+    func arrangeEvents(_ controlButton: GameControls) {
+        switch controlButton {
+        case .fullDown:
+            // swap(userSetEvents[0], with: userSetEvents[1])
+            userSetEvents.swapAt(0, 1)
+        case .halfUp1:
+            // swap(userSetEvents[1], with: userSetEvents[0])
+            userSetEvents.swapAt(1, 0)
+        case .halfDown1:
+            // swap(userSetEvents[1], with: userSetEvents[2])
+            userSetEvents.swapAt(1, 2)
+        case .halfUp2:
+            // swap(userSetEvents[2], with: userSetEvents[1])
+            userSetEvents.swapAt(2, 1)
+        case .halfDown2:
+            // swap(userSetEvents[2], with: userSetEvents[3])
+            userSetEvents.swapAt(2, 3)
+        case .fullUp:
+            // swap(userSetEvents[3], with: userSetEvents[2])
+            userSetEvents.swapAt(3, 2)
+        }
+        presentEvents()
+    }
+    
+    /*
+    func swap(_ event1: BoutGameEvent, with event2: BoutGameEvent) {
+        var tempEvent: BoutGameEvent
+        var eventA = event1
+        var eventB = event2
+        tempEvent = eventA
+        eventA = eventB
+        eventB = tempEvent
+    } */
+    
 }
 
