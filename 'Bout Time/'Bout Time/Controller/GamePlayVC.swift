@@ -170,6 +170,7 @@ class GamePlayVC: UIViewController {
         deselectAllControlButtons()
     }
     
+    /// Arranges event labels as per user input
     func arrangeEvents(_ controlButton: GameControls) {
         switch controlButton {
         case .fullDown:
@@ -185,7 +186,7 @@ class GamePlayVC: UIViewController {
         case .fullUp:
             userSetEvents.swapAt(3, 2)
         }
-        wait(for: 1)
+        presentEvents()
     }
     
     /// Disable labels user interactivity
@@ -335,19 +336,5 @@ class GamePlayVC: UIViewController {
         halfDown2Button.isSelected = false
         fullUpButton.isSelected = false
     }
-    
-    /// Helper method to introduce some delay before checking the quiz status
-    func wait(for seconds: Int) {
-        // Converts a delay in seconds to nanoseconds as signed 64 bit integer
-        let delay = Int64(NSEC_PER_SEC * UInt64(seconds))
-        // Calculates a time value to execute the method given current time and delay
-        let dispatchTime = DispatchTime.now() + Double(delay) / Double(NSEC_PER_SEC)
-        
-        // Executes the desired method at the dispatch time on the main queue
-        DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
-            self.presentEvents()
-        }
-    }
-    
 }
 

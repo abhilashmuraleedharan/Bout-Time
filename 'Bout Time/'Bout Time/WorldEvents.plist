@@ -132,5 +132,75 @@
 		<string>2014</string>
 		<string>https://en.wikipedia.org/wiki/Swift_(programming_language)</string>
 	</array>
+	<key>Abdication of the Tsar Nikolas II</key>
+	<array>
+		<string>1917</string>
+		<string>https://en.wikipedia.org/wiki/Nicholas_II_of_Russia</string>
+	</array>
+	<key>Irish Free State Treaty Signed</key>
+	<array>
+		<string>1921</string>
+		<string>https://www.history.com/this-day-in-history/irish-free-state-declared</string>
+	</array>
+	<key>Hitler Annexes Austria</key>
+	<array>
+		<string>1938</string>
+		<string>https://www.history.com/this-day-in-history/germany-annexes-austria</string>
+	</array>
+	<key>Fall of Stalingrad</key>
+	<array>
+		<string>1943</string>
+		<string>https://en.wikipedia.org/wiki/Battle_of_Stalingrad</string>
+	</array>
+	<key>Mao&apos;s Communists Take Over China</key>
+	<array>
+		<string>1949</string>
+		<string>https://en.wikipedia.org/wiki/Chinese_Communist_Revolution</string>
+	</array>
+	<key>Cuban Missile Crisis</key>
+	<array>
+		<string>1962</string>
+		<string>https://en.wikipedia.org/wiki/Cuban_Missile_Crisis</string>
+	</array>
+	<key>Nixon Resigns in Shame</key>
+	<array>
+		<string>1974</string>
+		<string>https://www.history.com/this-day-in-history/nixon-resigns</string>
+	</array>
+	<key>Fall of Berlin Wall</key>
+	<array>
+		<string>1989</string>
+		<string>https://www.thoughtco.com/the-berlin-wall-28-year-history-1779495</string>
+	</array>
+	<key>Nelson Mandela Released from Prison</key>
+	<array>
+		<string>1990</string>
+		<string>https://www.history.com/this-day-in-history/nelson-mandela-released-from-prison</string>
+	</array>
+	<key>The Capture of Saddam Hussein</key>
+	<array>
+		<string>2003</string>
+		<string>https://www.history.com/this-day-in-history/saddam-hussein-captured</string>
+	</array>
+	<key>Donald Trump wins the U.S. Presidency</key>
+	<array>
+		<string>2016</string>
+		<string>https://www.history.com/topics/us-presidents/donald-trump</string>
+	</array>
+	<key>The World Strikes a Deal on Climate Change</key>
+	<array>
+		<string>2015</string>
+		<string>https://unfccc.int/news/finale-cop21</string>
+	</array>
+	<key>ISRO launched a record 104 satellites</key>
+	<array>
+		<string>2017</string>
+		<string>https://economictimes.indiatimes.com/news/science/isro-sends-104-satellites-in-one-go-breaks-russias-record/articleshow/57159365.cms</string>
+	</array>
+	<key>France beats Croatia to win World Cup for the second time</key>
+	<array>
+		<string>2018</string>
+		<string>https://www.usatoday.com/story/sports/soccer/worldcup/2018/07/15/france-wins-world-cup-final-croatia/786415002/</string>
+	</array>
 </dict>
 </plist>
