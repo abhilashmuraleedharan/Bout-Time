@@ -32,7 +32,7 @@ class GamePlayVC: UIViewController {
     //MARK: - Stored Properties
     let boutGame: Game
     var gameTimer: Timer!
-    var timerRunning: Bool = false
+    var timerRunning = false
     var secondsLeft = 60
     var userSetEvents = [BoutGameEvent]()
     
@@ -99,32 +99,26 @@ class GamePlayVC: UIViewController {
     
     //MARK:- IB Actions
     @IBAction func fullDownButtonTapped(_ sender: Any) {
-        fullDownButton.isSelected = true
         arrangeEvents(.fullDown)
     }
     
     @IBAction func halfUp1ButtonTapped(_ sender: Any) {
-        halfUp1Button.isSelected = true
         arrangeEvents(.halfUp1)
     }
     
     @IBAction func halfDown1ButtonTapped(_ sender: Any) {
-        halfDown1Button.isSelected = true
         arrangeEvents(.halfDown1)
     }
     
     @IBAction func halfUp2ButtonTapped(_ sender: Any) {
-        halfUp2Button.isSelected = true
         arrangeEvents(.halfUp2)
     }
     
     @IBAction func halfDown2ButtonTapped(_ sender: Any) {
-        halfDown2Button.isSelected = true
         arrangeEvents(.halfDown2)
     }
     
     @IBAction func fullUpButtonTapped(_ sender: Any) {
-        fullUpButton.isSelected = true
         arrangeEvents(.fullUp)
     }
     
@@ -167,7 +161,6 @@ class GamePlayVC: UIViewController {
         event2Label.text = userSetEvents[1].description
         event3Label.text = userSetEvents[2].description
         event4Label.text = userSetEvents[3].description
-        deselectAllControlButtons()
     }
     
     /// Arranges event labels as per user input
@@ -291,12 +284,12 @@ class GamePlayVC: UIViewController {
         halfUp2Button.setImage(UIImage(named: "up_half")?.withRenderingMode(.automatic), for: .normal)
         halfDown2Button.setImage(UIImage(named: "down_half")?.withRenderingMode(.automatic), for: .normal)
         fullUpButton.setImage(UIImage(named: "up_full")?.withRenderingMode(.automatic), for: .normal)
-        fullDownButton.setImage(UIImage(named: "down_full_selected")?.withRenderingMode(.automatic), for: .selected)
-        halfUp1Button.setImage(UIImage(named: "up_half_selected")?.withRenderingMode(.automatic), for: .selected)
-        halfDown1Button.setImage(UIImage(named: "down_half_selected")?.withRenderingMode(.automatic), for: .selected)
-        halfUp2Button.setImage(UIImage(named: "up_half_selected")?.withRenderingMode(.automatic), for: .selected)
-        halfDown2Button.setImage(UIImage(named: "down_half_selected")?.withRenderingMode(.automatic), for: .selected)
-        fullUpButton.setImage(UIImage(named: "up_full_selected")?.withRenderingMode(.automatic), for: .selected)
+        fullDownButton.setImage(UIImage(named: "down_full_selected")?.withRenderingMode(.automatic), for: .highlighted)
+        halfUp1Button.setImage(UIImage(named: "up_half_selected")?.withRenderingMode(.automatic), for: .highlighted)
+        halfDown1Button.setImage(UIImage(named: "down_half_selected")?.withRenderingMode(.automatic), for: .highlighted)
+        halfUp2Button.setImage(UIImage(named: "up_half_selected")?.withRenderingMode(.automatic), for: .highlighted)
+        halfDown2Button.setImage(UIImage(named: "down_half_selected")?.withRenderingMode(.automatic), for: .highlighted)
+        fullUpButton.setImage(UIImage(named: "up_full_selected")?.withRenderingMode(.automatic), for: .highlighted)
     }
     
     @objc func event1LabelTapped(sender: UITapGestureRecognizer) {
@@ -326,15 +319,6 @@ class GamePlayVC: UIViewController {
             let safariVC = SFSafariViewController(url: webURL as URL)
             present(safariVC, animated: true, completion: nil)
         }
-    }
-    
-    func deselectAllControlButtons() {
-        fullDownButton.isSelected = false
-        halfUp1Button.isSelected = false
-        halfDown1Button.isSelected = false
-        halfUp2Button.isSelected = false
-        halfDown2Button.isSelected = false
-        fullUpButton.isSelected = false
     }
 }
 
