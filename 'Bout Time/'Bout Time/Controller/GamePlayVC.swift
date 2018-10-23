@@ -84,7 +84,7 @@ class GamePlayVC: UIViewController {
     }
     
     // To detect shake gesture
-    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if event?.subtype == motion {
             endGameRound()
         }
