@@ -8,9 +8,14 @@
 
 import AudioToolbox
 
-enum GameSound {
-    case success
-    case failure
+enum GameSound: String {
+    case success = "CorrectDing"
+    case failure = "IncorrectBuzz"
+}
+
+enum SoundType: String {
+    case mp3
+    case wav
 }
 
 protocol SoundGeneratable {
@@ -30,17 +35,17 @@ class SoundGenerator: SoundGeneratable {
         do {
             switch state {
             case .success:
-                sound = try load(sound: "CorrectDing", ofType: "wav")
+                sound = try load(sound: GameSound.success.rawValue, ofType: SoundType.wav.rawValue)
                 play(gameSound: sound)
             case .failure:
-                sound = try load(sound: "IncorrectBuzz", ofType: "wav")
+                sound = try load(sound: GameSound.failure.rawValue, ofType: SoundType.wav.rawValue)
                 play(gameSound: sound)
                 
             }
         } catch SoundError.invalidResource {
-            print("Unable to load sound. Necessary wav files are missing")
+            fatalError("Unable to load sound. Necessary wav files are missing")
         } catch let error {
-            print("\(error)")
+            fatalError("\(error)")
         }
     }
     

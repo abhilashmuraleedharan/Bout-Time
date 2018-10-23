@@ -68,6 +68,15 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		CCEFDA72217F119200D00719 /* GameSounds */ = {
+			isa = PBXGroup;
+			children = (
+				CCF871F62121A3F100FD9450 /* CorrectDing.wav */,
+				CCF871F72121A3F100FD9450 /* IncorrectBuzz.wav */,
+			);
+			path = GameSounds;
+			sourceTree = "<group>";
+		};
 		CCF871D82121A37900FD9450 = {
 			isa = PBXGroup;
 			children = (
@@ -87,10 +96,9 @@
 		CCF871E32121A37A00FD9450 /* 'Bout Time */ = {
 			isa = PBXGroup;
 			children = (
+				CCEFDA72217F119200D00719 /* GameSounds */,
 				CC28D5AC212324BA00628699 /* Model */,
 				CC28D5AE212324CC00628699 /* Controller */,
-				CCF871F62121A3F100FD9450 /* CorrectDing.wav */,
-				CCF871F72121A3F100FD9450 /* IncorrectBuzz.wav */,
 				CCF871E42121A37A00FD9450 /* AppDelegate.swift */,
 				CCF871E82121A37A00FD9450 /* Main.storyboard */,
 				CCF871EB2121A37D00FD9450 /* Assets.xcassets */,
@@ -327,6 +335,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VVFLQ8BLF2;
 				INFOPLIST_FILE = "'Bout Time/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -334,7 +343,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.abhilashapps.-Bout-Time";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -345,6 +354,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VVFLQ8BLF2;
 				INFOPLIST_FILE = "'Bout Time/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -352,7 +362,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.abhilashapps.-Bout-Time";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
