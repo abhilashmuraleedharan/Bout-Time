@@ -9,19 +9,19 @@
 import Foundation
 import GameKit
 
-protocol BoutGameEvent {
+protocol BoutTimeEvent {
     var description: String { get set }
     var yearOfOccurrence: Int { get set }
     var webURL: String { get set }
 }
 
-struct Event: BoutGameEvent {
+struct Event: BoutTimeEvent {
     var description: String
     var yearOfOccurrence: Int
     var webURL: String
 }
 
-enum BoutGameEventsGeneratorError: Error {
+enum BoutTimeEventsGeneratorError: Error {
     case invalidResource
     case conversionFailure
     case invalidYearFormat
@@ -30,66 +30,65 @@ enum BoutGameEventsGeneratorError: Error {
 class PlistConverter {
     static func dictionary(fromFile name: String, ofType type: String) throws -> [String: [String]] {
         guard let path = Bundle.main.path(forResource: name, ofType: type) else {
-            throw BoutGameEventsGeneratorError.invalidResource
+            throw BoutTimeEventsGeneratorError.invalidResource
         }
         guard let dictionary = NSDictionary(contentsOfFile: path) as? [String: [String]] else {
-            throw BoutGameEventsGeneratorError.conversionFailure
+            throw BoutTimeEventsGeneratorError.conversionFailure
         }
         return dictionary
     }
 }
 
 class EventsUnarchiver {
-    static func gameEvents(fromDictionary dictionary: [String:[String]]) throws -> [BoutGameEvent] {
-        var events = [Event]()
+    static func gameEvents(fromDictionary dictionary: [String:[String]]) throws -> [BoutTimeEvent] {
+        var events = [BoutTimeEvent]()
         for (key, value) in dictionary {
             if let year = Int(value[0]) {
                 events.append(Event(description: key, yearOfOccurrence: year, webURL: value[1]))
             } else {
-                throw BoutGameEventsGeneratorError.invalidYearFormat
+                throw BoutTimeEventsGeneratorError.invalidYearFormat
             }
         }
         return events
     }
 }
 
-protocol BoutEventsGenerator {
-    var gameEvents: [BoutGameEvent] { get }
-    init(gameEvents: [BoutGameEvent])
-    func generateRandomGameEvents() -> [BoutGameEvent]
-    func printAllGameEvents()
+protocol BoutTimeRandomEventsGenerator {
+    var gameEvents: [BoutTimeEvent] { get }
+    func generateRandomEvents() -> [BoutTimeEvent]
 }
 
-class RandomEventsGenerator: BoutEventsGenerator {
-    let gameEvents: [BoutGameEvent]  // Contains the whole set of events for the game
+struct RandomEventsGenerator: BoutTimeRandomEventsGenerator {
+    let gameEvents: [BoutTimeEvent]  // Contains the whole set of events for the game
     let eventsPerRound = 4
-    var indexOfSelectedEvent: Int = 0
-    var eventsPresentedIndexes = [Int]()  // To keep track of indices of events that's already presented in a round
     
-    required init(gameEvents: [BoutGameEvent]) {
+    init(gameEvents: [BoutTimeEvent]) {
         self.gameEvents = gameEvents
     }
     
     /// Instance method to get a set of 4 random events
-    func generateRandomGameEvents() -> [BoutGameEvent] {
-        var gameRoundEvents = [BoutGameEvent]()
-        eventsPresentedIndexes = []
+    func generateRandomEvents() -> [BoutTimeEvent] {
+        var gameRoundEvents = [BoutTimeEvent]()
+        var indexOfSelectedEvent: Int = 0
+        var presentedEventsIndices = [Int]()
+        
         for _ in 1...eventsPerRound {
             indexOfSelectedEvent = GKRandomSource.sharedRandom().nextInt(upperBound: gameEvents.count)
             // To prevent getting same event in a round
-            while (eventsPresentedIndexes.contains(indexOfSelectedEvent)) {
+            while (presentedEventsIndices.contains(indexOfSelectedEvent)) {
                 indexOfSelectedEvent = GKRandomSource.sharedRandom().nextInt(upperBound: gameEvents.count)
             }
             // Store the indices of events already generated
-            eventsPresentedIndexes.append(indexOfSelectedEvent)
+            presentedEventsIndices.append(indexOfSelectedEvent)
             gameRoundEvents.append(gameEvents[indexOfSelectedEvent])
         }
+        
         return gameRoundEvents
     }
     
     /// Instance method to view all game events details
     func printAllGameEvents() {
-        var i: Int = 1
+        var i = 1
         for event in gameEvents {
             print("Event \(i)")
             print("------------------------------------")

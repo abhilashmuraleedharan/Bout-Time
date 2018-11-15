@@ -18,39 +18,33 @@ enum SoundType: String {
     case wav
 }
 
-protocol SoundGeneratable {
-    func playSoundOf(_ : GameSound)
-}
-
 enum SoundError: Error {
     case invalidResource
 }
 
-class SoundGenerator: SoundGeneratable {
-    var sound: SystemSoundID = 0
+struct SoundEffectsPlayer {
     var gameSound: SystemSoundID = 0
     
     /// Instance method to play sound
-    func playSoundOf(_ state: GameSound) {
+    mutating func playSoundEffectOf(_ state: GameSound) {
+        let sound: SystemSoundID
         do {
             switch state {
             case .success:
                 sound = try load(sound: GameSound.success.rawValue, ofType: SoundType.wav.rawValue)
-                play(gameSound: sound)
             case .failure:
                 sound = try load(sound: GameSound.failure.rawValue, ofType: SoundType.wav.rawValue)
-                play(gameSound: sound)
-                
             }
+            play(sound)
         } catch SoundError.invalidResource {
             fatalError("Unable to load sound. Necessary wav files are missing")
         } catch let error {
-            fatalError("\(error)")
+            fatalError("\(error.localizedDescription)")
         }
     }
     
     /// Helper method to load a game sound
-    func load(sound: String, ofType type: String) throws -> SystemSoundID {
+    mutating func load(sound: String, ofType type: String) throws -> SystemSoundID {
         guard let path = Bundle.main.path(forResource: sound, ofType: type) else {
             throw SoundError.invalidResource
         }
@@ -60,7 +54,7 @@ class SoundGenerator: SoundGeneratable {
     }
     
     /// Helper method to play a game sound
-    func play(gameSound: SystemSoundID) {
+    func play(_ gameSound: SystemSoundID) {
         AudioServicesPlaySystemSound(gameSound)
     }
 }

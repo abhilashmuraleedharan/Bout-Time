@@ -30,21 +30,20 @@ class GamePlayVC: UIViewController {
     @IBOutlet weak var failImage: UIImageView!
     
     //MARK: - Stored Properties
-    let boutGame: Game
+    var game: BoutTimeGame
     var gameTimer: Timer!
     var timerRunning = false
     var secondsLeft = 60
-    var userSetEvents = [BoutGameEvent]()
+    var userSetEvents = [BoutTimeEvent]()
     
     required init?(coder aDecoder: NSCoder) {
-        let gameAudio = SoundGenerator()
         do {
             let dictionary = try PlistConverter.dictionary(fromFile: "WorldEvents", ofType: "plist")
             let gameEventsList = try EventsUnarchiver.gameEvents(fromDictionary: dictionary)
             let eventsGenerator = RandomEventsGenerator(gameEvents: gameEventsList)
-            boutGame = Game(havingRounds: 6, audio: gameAudio, eventsGenerator: eventsGenerator)
+            game = BoutTimeGame(havingRounds: 6, withGameEventsGenerator: eventsGenerator)
         } catch let error {
-            fatalError("\(error)")
+            fatalError("\(error.localizedDescription)")
         }
         super.init(coder: aDecoder)
     }
@@ -93,7 +92,7 @@ class GamePlayVC: UIViewController {
     // To pass data to another view controller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let gameScoresVC = segue.destination as? GameScoresVC {
-            gameScoresVC.boutGame = boutGame
+            gameScoresVC.game = game
         }
     }
     
@@ -124,13 +123,13 @@ class GamePlayVC: UIViewController {
     
     //MARK: - Methods
     func startGame() {
-        boutGame.playerScore = 0
-        boutGame.roundsCompleted = 0
+        game.playerScore = 0
+        game.roundsCompleted = 0
         startNewRoundOfGame()
     }
     
     func checkAndProceedToNextRound() {
-        if boutGame.roundsCompleted == boutGame.roundsPerGame {
+        if game.roundsCompleted == game.roundsPerGame {
             gameOver()
         } else {
             startNewRoundOfGame()
@@ -150,10 +149,10 @@ class GamePlayVC: UIViewController {
         timerLabel.isHidden = false
         startTimer()
         enableControlButtonsUserInteractivity()
-        userSetEvents = boutGame.eventsGenerator.generateRandomGameEvents()
+        userSetEvents = game.eventsGenerator.generateRandomEvents()
         presentEvents()
         promptLabel.text = "Shake to complete"
-        boutGame.roundsCompleted += 1
+        game.roundsCompleted += 1
     }
     
     func presentEvents() {
@@ -242,7 +241,7 @@ class GamePlayVC: UIViewController {
     /// End current game round
     func endGameRound() {
         gameTimer.invalidate()
-        let result = boutGame.evaluateOrderOf(events: userSetEvents)
+        let result = game.evaluateOrderOf(events: userSetEvents)
         timerLabel.isHidden = true
         disableControlButtonsUserInteractivity()
         enableEventLabelsUserInteractivity()
@@ -251,12 +250,12 @@ class GamePlayVC: UIViewController {
         if result {
             successImage.isHidden = false
             failImage.isHidden = true
-            boutGame.audio.playSoundOf(.success)
-            boutGame.playerScore += 1
+            game.audioPlayer.playSoundEffectOf(.success)
+            game.playerScore += 1
         } else {
             successImage.isHidden = true
             failImage.isHidden = false
-            boutGame.audio.playSoundOf(.failure)
+            game.audioPlayer.playSoundEffectOf(.failure)
         }
     }
     

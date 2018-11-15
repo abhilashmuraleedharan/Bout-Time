@@ -13,11 +13,11 @@ class GameScoresVC: UIViewController {
     //MARK: - IB Outlets
     @IBOutlet weak var scoresLabel: UILabel!
     
-    var boutGame: Game?
+    var game: BoutTimeGame?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let game = boutGame {
+        if let game = game {
             scoresLabel.text = "\(game.playerScore)/\(game.roundsPerGame)"
         }
     }
