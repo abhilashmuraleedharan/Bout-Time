@@ -91,8 +91,10 @@ class GamePlayVC: UIViewController {
     
     // To pass data to another view controller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let gameScoresVC = segue.destination as? GameScoresVC {
-            gameScoresVC.game = game
+        if segue.identifier == "gameScoresVCSegue" {
+           if let gameScoresVC = segue.destination as? GameScoresVC {
+               gameScoresVC.game = game
+           }
         }
     }
     
