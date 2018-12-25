@@ -1,5 +1,5 @@
 //
-//  SoundGenerator.swift
+//  SoundEffectsPlayer.swift
 //  'Bout Time
 //
 //  Created by Abhilash Muraleedharan on 15/08/18.
@@ -27,30 +27,28 @@ struct SoundEffectsPlayer {
     
     /// Instance method to play sound
     mutating func playSoundEffectOf(_ state: GameSound) {
-        let sound: SystemSoundID
         do {
             switch state {
             case .success:
-                sound = try load(sound: GameSound.success.rawValue, ofType: SoundType.wav.rawValue)
+                try load(sound: GameSound.success.rawValue)
             case .failure:
-                sound = try load(sound: GameSound.failure.rawValue, ofType: SoundType.wav.rawValue)
+                try load(sound: GameSound.failure.rawValue)
             }
-            play(sound)
+            play(gameSound)
         } catch SoundError.invalidResource {
-            fatalError("Unable to load sound. Necessary wav files are missing")
+            fatalError("Unable to load sound. Necessary sound files are missing")
         } catch let error {
             fatalError("\(error.localizedDescription)")
         }
     }
     
     /// Helper method to load a game sound
-    mutating func load(sound: String, ofType type: String) throws -> SystemSoundID {
-        guard let path = Bundle.main.path(forResource: sound, ofType: type) else {
+    mutating func load(sound: String, ofType type: SoundType = .wav) throws {
+        guard let path = Bundle.main.path(forResource: sound, ofType: type.rawValue) else {
             throw SoundError.invalidResource
         }
         let soundUrl = URL(fileURLWithPath: path)
         AudioServicesCreateSystemSoundID(soundUrl as CFURL, &gameSound)
-        return gameSound
     }
     
     /// Helper method to play a game sound

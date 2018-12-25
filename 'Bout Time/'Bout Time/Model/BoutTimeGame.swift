@@ -1,5 +1,5 @@
 //
-//  Game.swift
+//  BoutTimeGame.swift
 //  'Bout Time
 //
 //  Created by Abhilash Muraleedharan on 15/08/18.
@@ -20,7 +20,7 @@ protocol BoutTime {
     var roundsPerGame: Int { get }
     var roundsCompleted: Int { get set }
     var audioPlayer: SoundEffectsPlayer { get set }
-    var eventsGenerator: BoutTimeRandomEventsGenerator { get set }
+    var eventsGenerator: BoutTimeRandomEventsGenerator { get }
     
     func evaluateOrderOf(events: [BoutTimeEvent]) -> Bool
 }
@@ -30,7 +30,7 @@ struct BoutTimeGame: BoutTime {
     let roundsPerGame: Int
     var roundsCompleted = 0
     var audioPlayer = SoundEffectsPlayer()
-    var eventsGenerator: BoutTimeRandomEventsGenerator
+    let eventsGenerator: BoutTimeRandomEventsGenerator
     
     init(havingRounds rounds: Int, withGameEventsGenerator eventsGenerator: BoutTimeRandomEventsGenerator) {
         self.eventsGenerator = eventsGenerator
@@ -40,15 +40,15 @@ struct BoutTimeGame: BoutTime {
     /// Instance method to evaluate the correctness of game events ordered by the user
     func evaluateOrderOf(events: [BoutTimeEvent]) -> Bool {
         var correctOrderOfYears = [Int]()    // Collection to hold the correct order of events by their year of occurrence
-        var presentedOrderOfYears = [Int]()  // Collection to hold the presented order of events by their year of occurrence
+        var userSetOrderOfYears = [Int]()  // Collection to hold the user submitted order of events by their year of occurrence
         for event in events {
-            presentedOrderOfYears.append(event.yearOfOccurrence)
+            userSetOrderOfYears.append(event.yearOfOccurrence)
         }
-        // Sort game events in ascending order based on their year of occurrence and store the sorted array to a new collection
+        // Sort the game events in ascending order of their year of occurrence and store the sorted array to a new collection
         let eventsInAscendingOrderOfOccurrence = events.sorted{ $0.yearOfOccurrence < $1.yearOfOccurrence }
         for event in eventsInAscendingOrderOfOccurrence {
             correctOrderOfYears.append(event.yearOfOccurrence)
         }
-        return correctOrderOfYears == presentedOrderOfYears ? true : false
+        return correctOrderOfYears == userSetOrderOfYears ? true : false
     }
 }

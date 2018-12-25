@@ -53,18 +53,18 @@ class GamePlayVC: UIViewController {
         super.viewDidLoad()
         
         // Set up Gesture Recognizers for non control UI elements
-        let event1LabelTap = UITapGestureRecognizer(target: self, action: #selector(event1LabelTapped))
-        let event2LabelTap = UITapGestureRecognizer(target: self, action: #selector(event2LabelTapped))
-        let event3LabelTap = UITapGestureRecognizer(target: self, action: #selector(event3LabelTapped))
-        let event4LabelTap = UITapGestureRecognizer(target: self, action: #selector(event4LabelTapped))
+        let event1LabelTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(event1LabelTapped))
+        let event2LabelTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(event2LabelTapped))
+        let event3LabelTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(event3LabelTapped))
+        let event4LabelTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(event4LabelTapped))
         let successImageTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(resultImageTapped))
         let failImageTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(resultImageTapped))
         
         // Assign Gesture Recognizers
-        event1Label.addGestureRecognizer(event1LabelTap)
-        event2Label.addGestureRecognizer(event2LabelTap)
-        event3Label.addGestureRecognizer(event3LabelTap)
-        event4Label.addGestureRecognizer(event4LabelTap)
+        event1Label.addGestureRecognizer(event1LabelTapRecognizer)
+        event2Label.addGestureRecognizer(event2LabelTapRecognizer)
+        event3Label.addGestureRecognizer(event3LabelTapRecognizer)
+        event4Label.addGestureRecognizer(event4LabelTapRecognizer)
         successImage.addGestureRecognizer(successImageTapRecognizer)
         failImage.addGestureRecognizer(failImageTapRecognizer)
         

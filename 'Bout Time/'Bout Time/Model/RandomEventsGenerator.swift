@@ -9,25 +9,13 @@
 import Foundation
 import GameKit
 
-protocol BoutTimeEvent {
-    var description: String { get set }
-    var yearOfOccurrence: Int { get set }
-    var webURL: String { get set }
-}
-
-struct Event: BoutTimeEvent {
-    var description: String
-    var yearOfOccurrence: Int
-    var webURL: String
-}
-
 enum BoutTimeEventsGeneratorError: Error {
     case invalidResource
     case conversionFailure
     case invalidYearFormat
 }
 
-class PlistConverter {
+struct PlistConverter {
     static func dictionary(fromFile name: String, ofType type: String) throws -> [String: [String]] {
         guard let path = Bundle.main.path(forResource: name, ofType: type) else {
             throw BoutTimeEventsGeneratorError.invalidResource
@@ -39,7 +27,7 @@ class PlistConverter {
     }
 }
 
-class EventsUnarchiver {
+struct EventsUnarchiver {
     static func gameEvents(fromDictionary dictionary: [String:[String]]) throws -> [BoutTimeEvent] {
         var events = [BoutTimeEvent]()
         for (key, value) in dictionary {
@@ -69,7 +57,7 @@ struct RandomEventsGenerator: BoutTimeRandomEventsGenerator {
     /// Instance method to get a set of 4 random events
     func generateRandomEvents() -> [BoutTimeEvent] {
         var gameRoundEvents = [BoutTimeEvent]()
-        var indexOfSelectedEvent: Int = 0
+        var indexOfSelectedEvent = 0
         var presentedEventsIndices = [Int]()
         
         for _ in 1...eventsPerRound {
